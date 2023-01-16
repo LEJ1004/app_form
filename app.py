@@ -43,7 +43,7 @@ with st.form('my_form', clear_on_submit=True):
                     f"'{ugender}')")
         con.commit()
 
-con.subheader('회원목록')
+st.subheader('회원목록')
 
 
 
