@@ -32,7 +32,7 @@ with st.form('my_form', clear_on_submit=True):
         cur.execute(f"INSERT INTO users("
                     f"uid,"
                     f"uname, "
-                    f"pw,"
+                    f"upw,"
                     f"ubd,"
                     f"ugender)VALUES("
                     f"'{uid}',"
