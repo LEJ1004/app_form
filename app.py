@@ -29,7 +29,7 @@ with st.form('my_form', clear_on_submit=True):
             st.warning('비밀번호가 일치하지 않습니다.')
             st.stop()
 
-        cur.execute(f" INSERT INTO users("
+        cur.execute(f"INSERT INTO users("
                     f"uid,"
                     f"uname, "
                     f"pw,"
