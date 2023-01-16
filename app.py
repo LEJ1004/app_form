@@ -28,6 +28,7 @@ with st.form('my_form', clear_on_submit=True):
         if upw != upw_chk:
             st.warning('비밀번호가 일치하지 않습니다.')
             st.stop()
+        st.success(f'{uid}{uname}{upw}{ubd}{ugender}')
 
         cur.execute(f"INSERT INTO users("
                     f"uid,"
@@ -40,10 +41,11 @@ with st.form('my_form', clear_on_submit=True):
                     f"'{upw}',"
                     f"'{ubd}',"
                     f"'{ugender}')")
+        con.commit()
 
 con.subheader('회원목록')
 
-st.success(f'{uid}{uname}{upw}{ubd}{ugender}')
+
 
 df = pd.read_sql('SELECT * FROM users',con)
 st.dataframe(df)
