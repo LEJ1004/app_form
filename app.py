@@ -41,6 +41,8 @@ with st.form('my_form', clear_on_submit=True):
                     f"'{ubd}',"
                     f"'{ugender}')")
 
+        con.subheader('회원목록')
+
         st.success(f'{uid}{uname}{upw}{ubd}{ugender}')
 
     df = pd.read_sql('SELECT * FROM users',con)
