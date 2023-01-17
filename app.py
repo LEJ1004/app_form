@@ -90,8 +90,6 @@ if selected:
         st.success('성명을 수정하였습니다.')
 
 
-
-
 # df = pd.read_sql('SELECT * FROM users', con)
 # st.dataframe(df)
 
