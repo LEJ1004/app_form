@@ -105,6 +105,13 @@ elif menu == '로그인':
         id = st.text_input('아이디')
         pw = st.text_input('비밀번호', type='password')
         login_btn = st.form_submit_button('로그인')
+        if login_btn:
 
+            row = cur.execute(f"SELECT * FROM users WHERE  uid = '{id}'")
+            row = res.fetchone()
+
+            if row is None:
+                st.warning('존재하지 않는 아이디입니다.')
+                st.stop()
 
     #로그인 후
