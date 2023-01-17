@@ -97,3 +97,14 @@ elif menu == '회원목록':
 # df = pd.read_sql('SELECT * FROM users', con)
 # st.dataframe(df)
 
+elif menu == '로그인':
+
+    st.subheader('로그인')
+    #로그인 전
+    with st.form('login_form'):
+        id = st.text_input('아이디')
+        pw = st.text_input('비밀번호', type='password')
+        login_btn = st.form_submit_button('로그인')
+
+
+    #로그인 후
