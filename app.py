@@ -13,7 +13,7 @@ db_file = os.path.join(file_path, 'users.db')
 con = sqlite3.connect(db_file)
 cur = con.cursor()
 
-menu =st.sidebar.selectbox('메뉴',['회원가입','회원목목','로그인'])
+menu =st.sidebar.selectbox('메뉴',['회원가입','회원목록','로그인'])
 if menu == '회원가입':
 
     st.subheader('회원가입 폼')
@@ -100,18 +100,35 @@ elif menu == '회원목록':
 elif menu == '로그인':
 
     st.subheader('로그인')
-    #로그인 전
-    with st.form('login_form'):
-        id = st.text_input('아이디')
-        pw = st.text_input('비밀번호', type='password')
-        login_btn = st.form_submit_button('로그인')
-        if login_btn:
 
-            row = cur.execute(f"SELECT * FROM users WHERE  uid = '{id}'")
-            row = res.fetchone()
+    if st.session_state.login is None:
+        #로그인 전
+        with st.form('login_form'):
+            id = st.text_input('아이디')
+            pw = st.text_input('비밀번호', type='password')
+            login_btn = st.form_submit_button('로그인')
+            if login_btn:
 
-            if row is None:
-                st.warning('존재하지 않는 아이디입니다.')
-                st.stop()
+                row = cur.execute(f"SELECT * FROM users WHERE  uid = '{id}'")
+                row = res.fetchone()
+
+                if row is None:
+                    st.warning('존재하지 않는 아이디입니다.')
+                    st.stop()
+
+                pw_chk = row[3]
+                if pw != pw_chk:
+                    st.warning('비밀번호가 일치하지 않습니다.')
+                    st.stop()
+
+                st.session_state.login = True
+                st.session_state.uid = id
+                st.experimental_rerun()
 
     #로그인 후
+    elif st.session_state.login:
+
+        res = cur.execute(f"SELECT * FROM users WHERE uid='{st.session_state.uid}'")
+        row = res.fetchone()
+
+        st.table(res)
